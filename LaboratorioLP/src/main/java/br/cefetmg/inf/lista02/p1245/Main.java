@@ -1,3 +1,5 @@
+package br.cefetmg.inf.lista02.p1245;
+
 import java.io.IOException;
 import java.util.Scanner;
 

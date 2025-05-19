@@ -1,5 +1,8 @@
+package br.cefetmg.inf.lista02.p2318;
+
 import java.io.IOException;
- 
+import java.util.Scanner;
+
 /**
  * IMPORTANT: 
  *      O nome da classe deve ser "Main" para que a sua solução execute
@@ -9,12 +12,15 @@ import java.io.IOException;
 public class Main {
  
     public static void main(String[] args) throws IOException {
-        for(int i = 2; i <= 100; i++){
-            if(i % 2 == 0){
-                System.out.printf("%d\n", i);
+        Scanner input = new Scanner(System.in);
+        int[][] matriz = new int[3][3];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                matriz[i][j] = input.nextInt();
             }
         }
- 
+        int somacu = 0;
+        
     }
  
 }
