@@ -14,31 +14,25 @@ public class Main {
 
         int A, B;
         int soma = 0;
+
+        A = input.nextInt();
+        B = input.nextInt();
         int maior = 0;
         int menor = 0;
-
-        while(true){
-            A = input.nextInt();
-            B = input.nextInt();
-            if(A <= 0 || B <= 0){
-                break;
-            }
-            if(A > B){
-                maior = A;
-                menor = B;
-            }
-            else if(B > A){
-                maior = B;
-                menor = A;
-            }
-            for(int i = menor; i <= maior; i++){
-                System.out.printf("%d ", i);
+        if(A > B){
+            maior = A;
+            menor = B;
+        }
+        else if(B > A){
+            maior = B;
+            menor = A;
+        }
+        for(int i = menor + 1; i < maior; i++){
+            if(i %2 != 0){
                 soma += i;
             }
-            System.out.printf("Sum=%d\n", soma);
-            soma = 0;
         }
-        
+        System.out.printf("%d", soma);
     }
  
 }
