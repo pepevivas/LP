@@ -15,7 +15,7 @@ class Fila{
             realocaTamanho();
         }
     }
-    private void realocaTamanho(){
+    void realocaTamanho(){
         int[] vetorTemp = vetor;
         vetor = new int[atual+10];
         for(int i = 0; i < atual; i++){
