@@ -45,3 +45,4 @@ buildNumber.properties
 
 # Netbeans
 .netbeans*
+/LaboratorioLP/src/main/java/br/cefetmg/inf/lab20250602/nbproject/private/
