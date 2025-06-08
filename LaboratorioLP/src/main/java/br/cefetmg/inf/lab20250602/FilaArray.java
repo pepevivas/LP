@@ -6,7 +6,7 @@ class Fila{
     int[] vetor;
     int atual = 0;
     public Fila(int tamanhoDoVetor){
-        int[] vetor = new int[tamanhoDoVetor];
+        vetor = new int[tamanhoDoVetor];
     }
     void enfileirar(int valor){
         vetor[atual] = valor;

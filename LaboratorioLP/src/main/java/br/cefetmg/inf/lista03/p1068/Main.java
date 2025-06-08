@@ -23,7 +23,7 @@ class PilhaEncadeada {
         novo.proximo = topo;
         topo = novo;
     }
-
+    
     public char desempilhar() {
         if (estaVazia()) {
             throw new RuntimeException("Pilha vazia!");
