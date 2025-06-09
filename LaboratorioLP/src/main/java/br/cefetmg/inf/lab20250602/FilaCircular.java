@@ -36,7 +36,7 @@ public class FilaCircular {
        return atual;
     }
     boolean estaVazia(){
-        if(vetor[0] == 0){
+        if(atual == 0){
             return true;
         }
         return false;
