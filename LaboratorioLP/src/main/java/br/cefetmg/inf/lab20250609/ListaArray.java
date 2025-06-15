@@ -2,14 +2,17 @@ package br.cefetmg.inf.lab20250609;
 
 class lista{
     int [] vetor;
+    int atual = 0;
     public lista(int tamanho){
         vetor = new int [tamanho];
     }
     public void inserirInicio(int valor){
         vetor[0] = valor;
+        atual++;
     }
     public void inserirFim(int valor){
         vetor[vetor.length - 1] = valor;
+        atual++;
     }
     public void inserirPosicao(int valor, int posicao){
         if(posicao == 0){
@@ -22,6 +25,11 @@ class lista{
         }
         if(posicao > vetor.length){
             realocaTamanho(posicao);
+            vetor[posicao - 1] = valor;
+            return;
+        }
+        if (atual >= tamanho()) {
+            realocaTamanho(10);
             vetor[posicao - 1] = valor;
             return;
         }
