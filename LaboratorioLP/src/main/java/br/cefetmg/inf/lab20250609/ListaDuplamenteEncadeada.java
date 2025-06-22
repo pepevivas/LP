@@ -1,19 +1,10 @@
-package br.cefetmg.inf.lab20250609;
-class No{
-    int conteudo;
-    No proximo;
-    No anterior;
-    public No(int conteudo){
-        this.conteudo = conteudo;
-        proximo = null;
-        anterior = null;
-    }
-}
-class Fila{
+package br.cefetmg.inf.lab20250609; 
+
+public class ListaDuplamenteEncadeada implements Lista{
     No inicio;
     No anterior;
     int tamanho;
-    Fila(){
+    ListaDuplamenteEncadeada(){
         inicio = null;
         anterior = null;
         tamanho = 0;
@@ -37,14 +28,17 @@ class Fila{
         novoNo.anterior = auxiliar;
         tamanho++;
     }
-    public void inserirPosicao(int posicao, int valor){
+    public boolean inserirPosicao(int posicao, int valor){
         if (posicao == 0) {
             inserirInicio(valor);
-            return;
+            return true;
         }
         if(posicao == tamanho + 1){
             inserirFim(valor);
-            return;
+            return true;
+        }
+        if(posicao < 0 ){
+            return false;
         }
         No novoNo = new No(valor);
         No auxiliar = inicio;
@@ -55,33 +49,46 @@ class Fila{
         auxiliar.proximo.anterior = novoNo;
         auxiliar.proximo = novoNo;
         tamanho++;
+        return true;
     }
-    public void removerInicio(){
+    public Integer removerInicio(){
+        if(estaVazia()){
+            return null;
+        }
         inicio = inicio.proximo;
+        int aux = inicio.conteudo;
         inicio.anterior = null;
         tamanho--;
+        return aux;
     }
-    public void removerFim(){
+    public Integer removerFim(){
+        if(estaVazia()){
+            return null;
+        }
         No auxiliar = inicio;
         while(auxiliar.proximo != null){
             auxiliar = auxiliar.proximo;
         }
+        int aux = auxiliar.conteudo;
         auxiliar.anterior.proximo = null;
         tamanho--;
+        return aux;
     }
-    public void removerPosicao(int posicao){
-        if(posicao == 0){
-            removerInicio();
-            return;
+    public Integer removerPosicao(int posicao){
+        if(estaVazia()){
+            return null;
         }
-        if(posicao == tamanho){
-            removerFim();
-            return;
+        if(posicao == 0){
+            return removerInicio();
+        }
+        if(posicao == tamanho - 1){
+            return removerFim();
         }
         No auxiliar = inicio;
         for(int i = 0; i < posicao; i++){
             auxiliar = auxiliar.proximo;
         }
+        int aux = auxiliar.conteudo;
         if (auxiliar.anterior != null) {
             auxiliar.anterior.proximo = auxiliar.proximo;
         }
@@ -89,6 +96,7 @@ class Fila{
             auxiliar.proximo.anterior = auxiliar.anterior;
         }
         tamanho--;
+        return aux;
     }
     public int tamanho(){
         return tamanho;
@@ -96,10 +104,16 @@ class Fila{
     public boolean estaVazia(){
         return tamanho == 0;
     }
-    public int obterInicio(){
+    public Integer obterInicio(){
+        if (estaVazia()) {
+            return null;
+        }
         return inicio.conteudo;
     }
-    public int obterFinal(){
+    public Integer obterFim(){
+        if (estaVazia()) {
+            return null;
+        }
         No auxiliar = inicio;
         while(auxiliar.proximo != null){
             auxiliar = auxiliar.proximo;
@@ -108,11 +122,9 @@ class Fila{
     }
     public Integer obterPosicao(int posicao){
         if(estaVazia()){
-            System.out.printf("ta vazia ó doido");
             return null;
         }
         if(posicao < 0){
-            System.err.printf("O meu caba ta errado ó");
             return null;
         }
         No auxiliar = inicio;
@@ -121,7 +133,7 @@ class Fila{
         }
         return auxiliar.conteudo;
     }
-    public int pesquisaPosicao(int item){
+    public int pesquisar(int item){
         No auxiliar = inicio;
         int posicao = 0;
         while(auxiliar != null){
@@ -131,11 +143,6 @@ class Fila{
             auxiliar = auxiliar.proximo;
         }
         return -1;
-    }
-}
-public class ListaDuplamenteEncadeada {
-    public static void main(String[] args) {
-        
     }
 }
  

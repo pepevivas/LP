@@ -1,9 +1,9 @@
 package br.cefetmg.inf.lab20250609;
 
-class lista{
+public class ListaArray implements Lista{
     int [] vetor;
     int atual = 0;
-    public lista(int tamanho){
+    ListaArray(int tamanho){
         vetor = new int [tamanho];
     }
     public void inserirInicio(int valor){
@@ -14,94 +14,101 @@ class lista{
         vetor[vetor.length - 1] = valor;
         atual++;
     }
-    public void inserirPosicao(int valor, int posicao){
+    public boolean inserirPosicao(int valor, int posicao){
         if(posicao == 0){
             inserirInicio(valor);
-            return;
+            return true;
         }
         if(posicao == vetor.length){
             inserirFim(valor);
-            return;
+            return true;
         }
         if(posicao > vetor.length){
-            realocaTamanho(posicao);
-            vetor[posicao - 1] = valor;
-            return;
+            return false;
         }
-        if (atual >= tamanho()) {
-            realocaTamanho(10);
+        if (atual == tamanho()) {
+            realocaTamanho(vetor.length + 10);
             vetor[posicao - 1] = valor;
-            return;
+            return true;
         }
         vetor[posicao - 1] = valor;
+        atual++;
+        return true;
     }
-    public void removerInicio(){
+    public Integer removerInicio(){
+        if(estaVazia()){
+            return null;
+        }
+        int aux = vetor[0];
         vetor[0] = 0;
+        return aux;
     }
-    public void removerFim(){
+    public Integer removerFim(){
+        if(estaVazia()){
+            return null;
+        }
+        int aux = vetor[vetor.length - 1];
         vetor[vetor.length - 1] = 0;
+        return aux;
+
     }
-    public void removerPosicao(int posicao){
+    public Integer removerPosicao(int posicao){
         if(posicao == 0){
-            removerInicio();
-            return;
+            return removerInicio();
         }
         if(posicao == vetor.length){
-            removerFim();
-            return;
+            return removerFim();
         }
         if(posicao > vetor.length){
-            System.out.printf("ta errado, posicao fora dos limites");
-            return;
+            return null;
         }
+        int aux = vetor[posicao - 1];
         vetor[posicao - 1] = 0;
+        return aux;
     }
-    public int obterInicio(){
+    public Integer obterInicio(){
+        if(estaVazia()){
+            return null;
+        }
         return vetor[0];
     }
-    public int obterFinal(){
+    public Integer obterFim(){
+        if(estaVazia()){
+            return null;
+        }
         return vetor[vetor.length - 1];
     }
     public Integer obterPosicao(int posicao){
         if(posicao == 0){
-            obterInicio();
-            return null;
+            return obterInicio();
         }
         if(posicao == vetor.length){
-            obterFinal();
-            return null;
+            return obterFim();
         }
         if(posicao > vetor.length){
-            System.out.printf("ta errado, posicao fora dos limites");
             return null;
         }
         return vetor[posicao - 1];
     }
-    public Integer pesquisaPosicao(int valor){
+    public int pesquisar(int valor){
         for(int i = 0; i < vetor.length; i++){
             if (vetor[i] == valor) {
                 return i;
             }
         }
-        System.out.printf("Nao existe posicao com esse valor");
-        return null;
+        return -1;
     }
-    private void realocaTamanho(int posicao){
+    private void realocaTamanho(int valor){
         int[] vetorTemp = vetor;
-        vetor = new int[posicao];
+        vetor = new int[valor];
         for(int i = 0; i < vetorTemp.length; i++){
             vetor[i] = vetorTemp[i];
         }
     }
     public boolean estaVazia(){
-        return vetor[0] == 0;
+        return tamanho() == 0;
     }
     public int tamanho(){
         return vetor.length;
-    }
-}
-public class ListaArray {
-    public static void main(String[] args) {
-        
     }
 }

@@ -1,19 +1,9 @@
 package br.cefetmg.inf.lab20250609;
 
-import java.io.IOException;
-
-class No{
-    int conteudo;
-    No proximo;
-    public No(int conteudo){
-        this.conteudo = conteudo;
-        this.proximo = null;
-    }
-}
-class Lista{
+public class ListaEncadeada implements Lista{
     No inicio;
     int tamanho;
-    public Lista(){
+    public ListaEncadeada(){
         inicio = null;
         tamanho = 0;
     }
@@ -32,18 +22,17 @@ class Lista{
         auxiliar.proximo = novoNo;
         tamanho++;
     }
-    public void inserirPosicao(int item, int posicao){
+    public boolean inserirPosicao(int item, int posicao){
         if(posicao == 0){
             inserirInicio(item);
-            return;
+            return true;
         }
         if(posicao < 0){
-            System.err.printf("O meu caba ta errado ó");
-            return;
+            return false;
         }
-        if(posicao == tamanho()+1){
+        if(posicao == tamanho() -1){
             inserirFim(item);
-            return;
+            return true;
         }
         No novoNo = new No(item);
         No auxiliar = inicio;
@@ -51,35 +40,44 @@ class Lista{
             auxiliar = auxiliar.proximo;
         novoNo.proximo = auxiliar.proximo;
         auxiliar.proximo = novoNo;
+        return true;
     }
-    public void removerInicio(){
+    public Integer removerInicio(){
+        if(estaVazia()){
+            return null;
+        }
+        int aux = inicio.conteudo;
         inicio = inicio.proximo;
         tamanho --;
+        return aux;
     }
-    public void removerFim(){
+    public Integer removerFim(){
+        if (estaVazia()) {
+            return null;
+        }
         No auxiliar = inicio;
-        while(auxiliar.proximo != null){
+        while(auxiliar.proximo.proximo  != null){
             auxiliar = auxiliar.proximo;
         }
-        auxiliar.proximo = null;
+        int aux = auxiliar.proximo.conteudo;
+        auxiliar = null;
         tamanho--;
+        return aux;
     }
-    public void removerPosicao(int posicao){
+    public Integer removerPosicao(int posicao){
         if(estaVazia()){
-            System.out.printf("ta vazia ó doido");
-            return;
+            return null;
         }
         if(posicao == 0){
-            removerInicio();
-            return;
+            int aux = removerInicio();
+            return aux;
         }
         if(posicao < 0){
-            System.err.printf("O meu caba ta errado ó");
-            return;
+            return null;
         }
-        if(posicao == tamanho()+1){
-            removerFim();
-            return;
+        if(posicao == tamanho()-1){
+            int aux = removerFim();
+            return aux;
         }
         No auxiliar = inicio;
         No anterior = null;
@@ -87,8 +85,10 @@ class Lista{
             anterior = auxiliar;
             auxiliar = auxiliar.proximo;
         }
+        int aux = anterior.proximo.conteudo;
         anterior.proximo = auxiliar.proximo;
         tamanho--;
+        return aux;
     }
     public int tamanho(){
         return tamanho;
@@ -96,10 +96,16 @@ class Lista{
     public boolean estaVazia(){
         return tamanho == 0;
     }
-    public int obterInicio(){
+    public Integer obterInicio(){
+        if(estaVazia()){
+            return null;
+        }
         return inicio.conteudo;
     }
-    public int obterFinal(){
+    public Integer obterFim(){
+        if(estaVazia()){
+            return null;
+        }
         No auxiliar = inicio;
         while(auxiliar.proximo != null){
             auxiliar = auxiliar.proximo;
@@ -108,7 +114,6 @@ class Lista{
     }
     public Integer obterPosicao(int posicao){
         if(estaVazia()){
-            System.out.printf("ta vazia ó doido");
             return null;
         }
         if(posicao < 0){
@@ -121,7 +126,7 @@ class Lista{
         }
         return auxiliar.conteudo;
     }
-    public int pesquisaPosicao(int item){
+    public int pesquisar(int item){
         No auxiliar = inicio;
         int posicao = 0;
         while(auxiliar != null){
@@ -131,10 +136,5 @@ class Lista{
             auxiliar = auxiliar.proximo;
         }
         return -1;
-    }
-}
-public class ListaEncadeada {
-    public static void main(String[] args) throws IOException {
-
     }
 }
