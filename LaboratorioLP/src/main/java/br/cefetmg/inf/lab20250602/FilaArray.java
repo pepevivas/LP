@@ -1,6 +1,6 @@
 package br.cefetmg.inf.lab20250602;
 import java.util.Scanner;
-
+/*
 import java.io.IOException;
 class Fila{
     int[] vetor;
@@ -54,3 +54,4 @@ public class FilaArray {
         int inicioDafila = fila.desenfileirar();
     }
 }
+*/

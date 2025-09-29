@@ -1,4 +1,5 @@
 package br.cefetmg.inf.lab20250721;
+/*
 import java.util.Scanner;
 class Funcionario{
     int codigo;
@@ -136,3 +137,4 @@ public class Main{
         //Prova A
     }
 }
+*/
