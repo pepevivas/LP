@@ -36,9 +36,6 @@ public class DequeCircularTest {
     public void tearDown() {
     }
 
-    /**
-     * Test comportamento ao remover de deque vazio.
-     */
     @Test
     public void testRemoverVazio() {
         Deque<Integer> deque = new DequeCircular<>(5);
